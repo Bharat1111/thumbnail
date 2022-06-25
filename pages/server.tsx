@@ -3,7 +3,7 @@ import { authOptions } from "./api/auth/[...nextauth]"
 import Layout from "../components/layout"
 import type { NextPageContext } from "next"
 
-export default function ServerSidePage({ session }) {
+export default function ServerSidePage({ session }: any) {
   // As this page uses Server Side Rendering, the `session` will be already
   // populated on render without needing to go through a loading stage.
 
@@ -36,7 +36,7 @@ export default function ServerSidePage({ session }) {
 export async function getServerSideProps(context: NextPageContext) {
   return {
     props: {
-      session: await unstable_getServerSession(context.req, context.res, authOptions),
+      // session: await unstable_getServerSession(context.req, context.res, authOptions),
     },
   }
 }
