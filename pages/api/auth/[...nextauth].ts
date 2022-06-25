@@ -12,11 +12,11 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      // authorization: {
-      //   params: {
-      //     scope: 'openid profile email https://www.googleapis.com/auth/youtube.readonly',
-      //   }
-      // }
+      authorization: {
+        params: {
+          scope: 'openid profile email https://www.googleapis.com/auth/youtube.readonly',
+        }
+      }
     }),
   ],
   theme: {
