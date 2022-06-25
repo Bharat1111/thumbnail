@@ -14,7 +14,7 @@ export default function BasicUpload() {
     const formData = new FormData()
     setFile(file)
     console.log(file)
-    formData.append("file", file)
+    formData.append("file", file as Blob)
     fetch("/api/youtube/setThumbnail", {
       method: "POST",
       body: formData,
