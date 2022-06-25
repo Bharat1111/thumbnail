@@ -14,9 +14,10 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
       authorization: {
         params: {
-          scope: 'openid profile email https://www.googleapis.com/auth/youtube.readonly',
-        }
-      }
+          scope:
+            "openid profile email https://www.googleapis.com/auth/youtube.upload",
+        },
+      },
     }),
   ],
   theme: {
@@ -31,10 +32,10 @@ export const authOptions: NextAuthOptions = {
     // When using `"database"`, the session cookie will only contain a `sessionToken` value,
     // which is used to look up the session in the database.
     strategy: "jwt",
-  
+
     // Seconds - How long until an idle session expires and is no longer valid.
     maxAge: 30 * 24 * 60 * 60, // 30 days
-  
+
     // Seconds - Throttle how frequently to write to database to extend a session.
     // Use it to limit write operations. Set to 0 to always update the database.
     // Note: This option is ignored if using JSON Web Tokens
