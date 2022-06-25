@@ -2,6 +2,7 @@ import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import Layout from "../components/layout"
 import type { NextPageContext } from "next"
+import { getSession } from "next-auth/react"
 
 export default function ServerSidePage({ session }: any) {
   // As this page uses Server Side Rendering, the `session` will be already
@@ -36,6 +37,7 @@ export default function ServerSidePage({ session }: any) {
 export async function getServerSideProps(context: NextPageContext) {
   return {
     props: {
+      session: await getSession(context)
       // session: await unstable_getServerSession(context.req, context.res, authOptions),
     },
   }

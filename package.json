@@ -23,6 +23,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "googleapis": "^104.0.0",
     "next": "12.1.7-canary.45",
     "next-auth": "latest",
     "nodemailer": "^6",
