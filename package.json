@@ -23,6 +23,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "express-fileupload": "^1.4.0",
     "googleapis": "^104.0.0",
     "next": "12.1.7-canary.45",
