@@ -10,7 +10,7 @@ const ThumbnailUploader = () => {
 
   const handleChange = (file: File) => {
     console.log("file dropped", file)
-    setThumbnailFiles([file, ...thumbnailFiles])
+    setThumbnailFiles([file, ...thumbnailFiles!])
     console.log(thumbnailFiles)
   }
   const formRef = useRef<HTMLFormElement>(null)
