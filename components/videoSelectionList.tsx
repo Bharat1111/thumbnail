@@ -41,16 +41,16 @@ const VideoSelectionList = () => {
   useEffect(() => {
     axios.get("/api/youtube/videos").then((res) => {
       let data = res.data
-      let partialVideos = data.uploads.slice(0, 5)
+      let partialVideos = data.slice(0, 5)
       setVideos(partialVideos)
     })
   }, [])
   return (
     <div className="flex flex-row gap-2 overflow-x-auto p-2">
-      {videos.map((video) => {
+      {videos.map((video, idx) => {
         let thumbnails = video.snippet?.thumbnails
         return (
-          <div onClick={() => setSelectedVideo(video)} className={``}>
+          <div key={idx} onClick={() => setSelectedVideo(video)} className={``}>
             <img
               width="270px"
               height="151px"

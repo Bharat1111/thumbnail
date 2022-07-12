@@ -33,13 +33,13 @@ export default async function videos(req: NextApiRequest, res: NextApiResponse) 
 
         let videoResponse = await service.videos.list({
             auth: authedClient,
-            part: ['statistics'],
+            part: ['snippet'],
             id: videoIds,
             maxResults: 50
         })
 // console.log(uploads)
         let videoStats = videoResponse.data?.items
-        res.status(200).send({videoStats, uploads});
+        res.status(200).send(videoStats);
     } else {
         res.status(401).send('You are not signed in!');
     }

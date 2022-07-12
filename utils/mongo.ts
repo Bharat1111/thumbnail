@@ -1,0 +1,65 @@
+import { MongoClient } from "mongodb"
+
+const uri = `mongodb+srv://user:user@cluster0.jux58.mongodb.net/?retryWrites=true&w=majority`
+const client = new MongoClient(uri)
+
+export type TestBlob = {
+  thumbnails: string[]
+  currentThumbnail: number
+  videoId: string
+  channelId: string
+  startDate: string // MM-DD-YY
+  testLength: number //days
+  accessToken: string
+  refreshToken: string
+}
+
+export const storeSingleDataInMongo = async (blobToStore: any) => {
+  async function run() {
+    try {
+      await client.connect()
+      const database = client.db("allTests")
+      const allTests = database.collection("allTests")
+      await allTests.insertOne(blobToStore)
+      console.log("Data stored")
+    } finally {
+      await client.close()
+    }
+  }
+  return run().catch(console.dir)
+}
+
+export const updateSingleDataInMongo = async (blobToStore: any) => {
+  async function run() {
+    try {
+      await client.connect()
+      const database = client.db("allTests")
+      const allTests = database.collection("allTests")
+      const query = { videoId: blobToStore?.videoId }
+      const update = { $set: blobToStore }
+      const options = { upsert: true }
+      await allTests.updateOne(query, update, options)
+      console.log("Data updated")
+    } finally {
+      await client.close()
+    }
+  }
+  return run().catch(console.dir)
+}
+
+export const getSingleDataFromMongo = async (videoId: string) => {
+  async function run() {
+    try {
+      await client.connect()
+      const database = client.db("allTests")
+      const allTests = database.collection("allTests")
+      const query = { videoId }
+      const result = await allTests.findOne(query)
+      console.log("Data retrieved", result)
+      return result
+    } finally {
+      await client.close()
+    }
+  }
+  return run().catch(console.dir)
+}

@@ -1,3 +1,4 @@
+import axios from "axios"
 import { useState } from "react"
 import UploadedThumbnailDisplayAndRemoval from "../components/ThumbnailDisplayAndRemoval"
 import ThumbnailUploader from "../components/ThumbnailUploader"
@@ -13,15 +14,41 @@ const selectVideo = () => {
   const [testLength, setTestLength] = useState<number>(0)
 
   const startTest = () => {
+    if (!selectedVideo) {
+      alert("Please select a video")
+      return
+    }
     setTestLength(thumbnailFiles.length)
-    let formData = new FormData()
+    // let formData = new FormData()
     let fileUploads = thumbnailFiles.map(file => {
       return uploadSingleFile(file)
       // formData.append(`thumbnail[]`, file)
     })
+    const channelId = selectedVideo.snippet?.channelId
     Promise.all(fileUploads).then(results => {
       // post to DB
-      console.log('results', results)
+      const thumbnails = results
+console.log('thumbnails', thumbnails)
+      const today = new Date()
+      const startDay = today.getUTCDate()
+      const startMonth = today.getUTCMonth() + 1
+      const startYear = today.getUTCFullYear() - 2000
+      // force two days MM-DD-YY
+      const startDate = (startMonth < 10 ? "0" : "") + startMonth + "-" + (startDay < 10 ? "0" : "") + startDay + "-" + startYear
+      const videoId = selectedVideo.id
+
+      let toStore = {
+        thumbnails,
+        videoId,
+        startDate,
+        testLength,
+        currentThumbnail: -1,
+        channelId
+      }
+
+      axios.post('/api/storage/saveTests', toStore).then(() => {
+        alert("Test started")
+      })
     })
   }
 
