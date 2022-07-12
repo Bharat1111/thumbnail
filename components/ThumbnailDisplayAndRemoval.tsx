@@ -6,10 +6,10 @@ const UploadedThumbnailDisplayAndRemoval = () => {
     const { thumbnailFiles, setThumbnailFiles } = useContext(ThumbnailSelectionContext)
 
     return (
-        <div className='flex flex-row justify-start'>
+        <div className='flex flex-row justify-start items-center overflow-x-auto gap-2'>
             {thumbnailFiles?.map((file, index) => {
                 return (
-                    <div key={index} className='relative m-3'>
+                    <div key={index} className='relative'>
                         <button className="absolute right-0 mt-[-10px] z-10" onClick={() => setThumbnailFiles(thumbnailFiles.filter((_, i) => i !== index))}>
                             <span className="text-black font-bold text-3xl">&times;</span>
                         </button>
