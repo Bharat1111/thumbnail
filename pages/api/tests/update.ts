@@ -7,7 +7,7 @@ export default async function update(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const videoId = req.query.videoId as string
+  const videoId = (req.body.videoId || req.query.videoId || req.body) as string
   const jobBlob: TestBlob = (await getSingleDataFromMongo(videoId)) as any
 
   const accessToken = jobBlob?.accessToken

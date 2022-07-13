@@ -23,6 +23,7 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "@cloudamqp/amqp-client": "^2.0.3",
     "axios": "^0.27.2",
     "express-fileupload": "^1.4.0",
     "formidable": "^2.0.1",

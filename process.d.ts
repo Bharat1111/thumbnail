@@ -3,5 +3,6 @@ declare namespace NodeJS {
     GOOGLE_ID: string
     GOOGLE_SECRET: string
     SECRET: string
+    AMQP_URL: string
   }
 }
