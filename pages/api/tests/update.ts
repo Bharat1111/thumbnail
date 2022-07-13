@@ -43,6 +43,7 @@ export default async function update(
     accessToken,
     refreshToken,
   }
+  console.log('going to acknowledge job', updateJobBlob)
   await updateSingleDataInMongo(updateJobBlob).then(() => {
     res.status(200).send("Thumbnail updated")
   })

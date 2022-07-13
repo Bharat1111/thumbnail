@@ -29,6 +29,24 @@ export const storeSingleDataInMongo = async (blobToStore: any) => {
   return run().catch(console.dir)
 }
 
+export const getAllVideoIds = async () => {
+  async function run() {
+    try {
+      await client.connect()
+      const database = client.db("allTests")
+      const allTests = database.collection("allTests")
+      const allFoundTests = await allTests.find().toArray()
+      const videoIds = allFoundTests.map(test => test.videoId)
+      
+      console.log("Data retrieved")
+      return videoIds
+    } finally {
+      await client.close()
+    }
+  }
+  return run().catch(console.dir)
+}
+
 export const updateSingleDataInMongo = async (blobToStore: any) => {
   async function run() {
     try {

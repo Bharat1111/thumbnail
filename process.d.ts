@@ -4,5 +4,6 @@ declare namespace NodeJS {
     GOOGLE_SECRET: string
     SECRET: string
     AMQP_URL: string
+    NEXT_PUBLIC_FILE_IO_KEY: string
   }
 }
