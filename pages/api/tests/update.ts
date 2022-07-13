@@ -1,7 +1,14 @@
 import axios from "axios"
 import { NextApiRequest, NextApiResponse } from "next"
 import { getSession } from "next-auth/react"
-import { getSingleDataFromMongo, TestBlob, updateSingleDataInMongo } from "../../../utils/mongo"
+import {
+  getSingleDataFromMongo,
+  TestBlob,
+  updateSingleDataInMongo,
+} from "../../../utils/mongo"
+
+const NEXTAUTH_URL =
+  process.env.NEXTAUTH_URL || "https://thumbnail-xi.vercel.app"
 
 export default async function update(
   req: NextApiRequest,
@@ -19,12 +26,15 @@ export default async function update(
 
   let nextThumbnailUrl = jobBlob?.thumbnails[nextThumbnail]
 
-  let thumbnailUpdated = await axios.post("http://localhost:3000/api/youtube/setThumbnailFromUrl", {
-    videoId,
-    thumbnailUrl: nextThumbnailUrl,
-    accessToken,
-    refreshToken,
-  })
+  let thumbnailUpdated = await axios.post(
+    `${NEXTAUTH_URL}/api/youtube/setThumbnailFromUrl`,
+    {
+      videoId,
+      thumbnailUrl: nextThumbnailUrl,
+      accessToken,
+      refreshToken,
+    }
+  )
 
   // update mongo
   let updateJobBlob = {
@@ -32,8 +42,8 @@ export default async function update(
     currentThumbnail: nextThumbnail,
     accessToken,
     refreshToken,
-    }
-    await updateSingleDataInMongo(updateJobBlob).then(() => {
-        res.status(200).send('Thumbnail updated')
-    })
+  }
+  await updateSingleDataInMongo(updateJobBlob).then(() => {
+    res.status(200).send("Thumbnail updated")
+  })
 }
