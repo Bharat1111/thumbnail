@@ -6,7 +6,6 @@ import got from "got"
 import { generateAuthedClient } from "../../../utils/youtubeUtils"
 import {
   bufferToStream,
-  stream2buffer,
   streamToBuffer,
 } from "../../../utils/streamUtils"
 
@@ -18,13 +17,10 @@ export default async function setThumbnail(
   const { videoId, accessToken, refreshToken, thumbnailUrl } = req.body
 
   const authedClient = generateAuthedClient({ accessToken, refreshToken })
-  const fileStream = got.stream(thumbnailUrl)
-  console.log("fileStream", fileStream)
+  const fileStream = got(thumbnailUrl, { isStream: true })
 
   const getBuffer = await streamToBuffer(fileStream)
-  console.log("fileStream", getBuffer)
   const finalStream = await bufferToStream(getBuffer)
-  console.log("finalStream")
 
   await service.thumbnails.set({
     auth: authedClient,

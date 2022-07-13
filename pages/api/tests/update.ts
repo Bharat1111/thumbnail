@@ -34,6 +34,6 @@ export default async function update(
     refreshToken,
     }
     await updateSingleDataInMongo(updateJobBlob).then(() => {
-        res.status(200).send('Data updated')
+        res.status(200).send('Thumbnail updated')
     })
 }
