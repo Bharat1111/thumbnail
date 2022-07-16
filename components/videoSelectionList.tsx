@@ -50,7 +50,15 @@ const VideoSelectionList = () => {
       {videos.map((video, idx) => {
         let thumbnails = video.snippet?.thumbnails
         return (
-          <div key={idx} onClick={() => setSelectedVideo(video)} className={``}>
+          <div
+            key={idx}
+            onClick={() => setSelectedVideo(video)}
+            className={
+              selectedVideo?.id === video.id
+                ? "border-[3px] border-gray-300"
+                : ""
+            }
+          >
             <img
               width="270px"
               height="151px"
