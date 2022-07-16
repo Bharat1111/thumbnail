@@ -40,7 +40,7 @@ const selectVideo = () => {
       const startDay = today.getUTCDate()
       const startMonth = today.getUTCMonth() + 1
       const startYear = today.getUTCFullYear() - 2000
-      // force two days MM-DD-YY
+      // force two digits MM-DD-YY
       const startDate =
         (startMonth < 10 ? "0" : "") +
         startMonth +
@@ -78,8 +78,10 @@ const selectVideo = () => {
       }}
     >
       <Layout>
-        <div className={`bg-gray-800 flex flex-col min-h-screen`}>
-          <main className={`flex flex-col justify-center flex-1 py-5`}>
+        <div
+          className={`w-full overflow-hidden bg-gray-800 flex flex-col min-h-screen`}
+        >
+          <main className={`ml-3 flex flex-col justify-center flex-1 py-5`}>
             {session && (
               <>
                 <h1 className="pb-8 font-bold text-3xl text-white pl-3">

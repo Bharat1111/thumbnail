@@ -47,6 +47,24 @@ export const getAllVideoIds = async () => {
   return run().catch(console.dir)
 }
 
+export const getAllVideosForChannel = async (channelId: string) => {
+  async function run() {
+    try {
+      await client.connect()
+      const database = client.db("allTests")
+      const allTests = database.collection("allTests")
+      const allFoundTests = await allTests.find({ channelId }).toArray()
+      // const videoIds = allFoundTests.map(test => test.videoId)
+      
+      console.log("Data retrieved for channel " + channelId)
+      return allFoundTests
+    } finally {
+      await client.close()
+    }
+  }
+  return run().catch(console.dir)
+}
+
 export const updateSingleDataInMongo = async (blobToStore: any) => {
   async function run() {
     try {
