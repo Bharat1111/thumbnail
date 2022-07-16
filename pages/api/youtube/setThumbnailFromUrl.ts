@@ -4,10 +4,7 @@ const service = google.youtube("v3")
 import got from "got"
 
 import { generateAuthedClient } from "../../../utils/youtubeUtils"
-import {
-  bufferToStream,
-  streamToBuffer,
-} from "../../../utils/streamUtils"
+import { bufferToStream, streamToBuffer } from "../../../utils/streamUtils"
 
 export default async function setThumbnail(
   req: NextApiRequest,
@@ -16,6 +13,7 @@ export default async function setThumbnail(
   // await runMiddleware(req, res, fileUpload())
   const { videoId, accessToken, refreshToken, thumbnailUrl } = req.body
 
+  console.log("Updaing in setthumbnail")
   const authedClient = generateAuthedClient({ accessToken, refreshToken })
   const fileStream = got(thumbnailUrl, { isStream: true })
 

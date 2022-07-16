@@ -14,6 +14,7 @@ export default async function update(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log('Request received through webhook')
   const videoId = (req.body.videoId || req.query.videoId || req.body) as string
   const jobBlob: TestBlob = (await getSingleDataFromMongo(videoId)) as any
 
