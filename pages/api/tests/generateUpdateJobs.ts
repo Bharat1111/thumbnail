@@ -19,7 +19,7 @@ export default async function generateJobs(
     const response = await sendJobsToQueue(videoIds)
     console.log('Generated jobs', response)
     res.status(200).send({
-        message: 'Published all videos',
+        message: `${response} Published all videos`,
         videoIds
     });
 }
