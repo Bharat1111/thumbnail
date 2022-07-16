@@ -5,5 +5,7 @@ declare namespace NodeJS {
     SECRET: string
     AMQP_URL: string
     NEXT_PUBLIC_FILE_IO_KEY: string
+    QUEUE_URL: string
+    WEBHOOK_URL: string
   }
 }

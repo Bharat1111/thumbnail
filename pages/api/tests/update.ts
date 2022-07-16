@@ -23,9 +23,11 @@ export default async function update(
   // move to next thumbnail
   const currentThumbnail = jobBlob.currentThumbnail
   const nextThumbnail = (currentThumbnail + 1) % jobBlob?.thumbnails.length
+  console.log('Updating from thumbnail ' + currentThumbnail + ' to ' + nextThumbnail)
 
   let nextThumbnailUrl = jobBlob?.thumbnails[nextThumbnail]
 
+  console.log('Starting updating')
   let thumbnailUpdated = await axios.post(
     `${NEXTAUTH_URL}/api/youtube/setThumbnailFromUrl`,
     {
@@ -35,6 +37,8 @@ export default async function update(
       refreshToken,
     }
   )
+
+  console.log('Updated Thumbnail', thumbnailUpdated)
 
   // update mongo
   let updateJobBlob = {
