@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import UserTestsContext from "../contexts/UserTestsContext"
 import axios from "axios"
 
-import Header from "./header"
+// import Header from "./header"
 import Sidebar from "./Sidebar"
 import { useSession } from "next-auth/react"
 import { TestBlob } from "../utils/mongo"
@@ -14,25 +14,32 @@ interface Props {
 export default function Layout({ children }: Props) {
   const { data: session, status } = useSession()
   const [tests, setTests] = useState<TestBlob[]>([])
+  const [channelId, setChannelId] = useState<string>("")
 
   useEffect(() => {
-    if (!session) return
+    // if (!session) return
 
-    const fetchData = async () => {
-      console.log("use effect")
-      const res = await axios.get("/api/youtube/channelId")
-      console.log(res)
-      setTests(res.data.tests)
-    }
-    fetchData()
+    // const fetchData = async () => {
+    // console.log("use effect")
+    axios
+      .get("/api/youtube/channelId")
+      .then((res) => {
+        setChannelId(res.data.channelId)
+        return axios.get(`/api/tests/allTests?channelId=${res.data.channelId}`)
+      })
+      .then((res) => setTests(res.data.tests))
+    // }
+    // fetchData()
   }, [])
 
   return (
-    <UserTestsContext.Provider value={{ tests, setTests }}>
+    <UserTestsContext.Provider
+      value={{ tests, setTests, channelId, setChannelId }}
+    >
       {/* <Header /> */}
-      <div className="flex flex-row overflow-x-hidden">
+      <div className="flex flex-row overflow-x-hidden min-h-screen">
         <Sidebar />
-        <main className="w-[85%]">{children}</main>
+        <main className="w-[85%] bg-gray-800">{children}</main>
       </div>
     </UserTestsContext.Provider>
   )
