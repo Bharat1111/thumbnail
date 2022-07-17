@@ -3,9 +3,9 @@ import GoogleProvider from "next-auth/providers/google"
 
 async function refreshAccessToken(token: any) {
   try {
-    console.log('refreshing token')
+    console.log("refreshing token")
     if (!token.refreshToken) {
-      throw new Error('No refresh token')
+      throw new Error("No refresh token")
     }
     const url =
       "https://oauth2.googleapis.com/token?" +
@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
       authorization: {
         params: {
           scope:
-            "openid profile email https://www.googleapis.com/auth/youtube.upload  https://www.googleapis.com/auth/youtube.readonly",
+            "openid profile email https://www.googleapis.com/auth/youtube.upload  https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly",
           prompt: "consent",
           accessType: "offline",
           response_type: "code",
@@ -65,11 +65,11 @@ export const authOptions: NextAuthOptions = {
     colorScheme: "light",
   },
   secret: process.env.SECRET,
-  // session: {
-  //   strategy: "jwt",
-  //   // maxAge: 30 * 24 * 60 * 60, // 30 days
-  //   // updateAge: 24 * 60 * 60, // 24 hours
-  // },
+  session: {
+    strategy: "jwt",
+    // maxAge: 30 * 24 * 60 * 60, // 30 days
+    // updateAge: 24 * 60 * 60, // 24 hours
+  },
   // jwt: {
   //   secret: process.env.SECRET
   // },
@@ -81,10 +81,10 @@ export const authOptions: NextAuthOptions = {
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           accessTokenExpires: Date.now() + account?.expires_at! * 1000,
-          user
+          user,
         }
       }
-      
+
       // Return previous token if accessToken is not expired
       // @ts-ignore
       if (Date.now() < token.accessTokenExpires) {
@@ -99,13 +99,13 @@ export const authOptions: NextAuthOptions = {
 
       session.user = token.user as any
       session.error = token.error
-      if(session.error) console.log('Session Error: ', session.error)
+      if (session.error) console.log("Session Error: ", session.error)
 
       return session
     },
   },
   events: {},
-  debug: false
+  debug: false,
 }
 
 export default NextAuth(authOptions)
