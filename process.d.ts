@@ -7,5 +7,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_FILE_IO_KEY: string
     QUEUE_URL: string
     WEBHOOK_URL: string
+    NEXT_PUBLIC_FILESTACK_KEY: string
   }
 }

@@ -4,13 +4,11 @@ import {google} from 'googleapis'
 const service = google.youtube('v3')
 
 import { generateAuthedClient } from "../../../utils/youtubeUtils";
-import { getAllVideosForChannel } from "../../../utils/mongo";
 
 export default async function videos(req: NextApiRequest, res: NextApiResponse) {
     const session = await getSession({ req });
     if (session) {
         let authedClient = generateAuthedClient(session)
-
         // get my channel id
         let channelIdResponse = await service.channels.list({
             auth: authedClient,
@@ -18,10 +16,10 @@ export default async function videos(req: NextApiRequest, res: NextApiResponse) 
             mine: true
         })
         let channelId = channelIdResponse.data?.items?.[0]?.id
-
-        const tests = await getAllVideosForChannel(channelId as string)
+        
+        console.log('channelId', channelId)
         // return channelId
-        res.status(200).send({ tests });
+        res.status(200).send({ channelId });
     } else {
         res.status(401).send('You are not signed in!');
     }

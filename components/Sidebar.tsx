@@ -14,14 +14,14 @@ const Sidebar = () => {
   ]
   const { data: session, status } = useSession()
   const { tests } = useContext(UserTestsContext)
-  console.log(tests)
+  // console.log(tests)
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ")
   }
 
   return (
-    <div className="w-[15%] flex flex-col border-r min-h-0 border-gray-700 bg-gray-800">
+    <div className="w-[15%] flex flex-col border-r min-h-0 border-gray-500 bg-gray-800">
       <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
           <img
@@ -39,14 +39,19 @@ const Sidebar = () => {
         >
           {session && (
             <>
-              <h1 className="text-white text-center text-xl">My Tests</h1>
+              <h1 className="p-1 text-white bg-green-600 cursor-pointer rounded-md text-center text-xl hover:bg-gray-700 hover:text-gray-400 mb-5 font-semibold">
+                Start new test
+              </h1>
+              <h1 className="text-white text-center font-semibold text-xl">
+                Current Tests
+              </h1>
               <MyTests tests={tests} />{" "}
             </>
           )}
         </nav>
       </div>
 
-      <div className="flex-shrink-0 flex bg-gray-700 p-4">
+      <div className="flex-shrink-0 flex p-4 hover:bg-gray-600">
         <a
           href={session ? `/api/auth/signout` : `/api/auth/signin`}
           className="flex-shrink-0 w-full group block"

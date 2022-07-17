@@ -36,8 +36,8 @@ export const getAllVideoIds = async () => {
       const database = client.db("allTests")
       const allTests = database.collection("allTests")
       const allFoundTests = await allTests.find().toArray()
-      const videoIds = allFoundTests.map(test => test.videoId)
-      
+      const videoIds = allFoundTests.map((test) => test.videoId)
+
       console.log("Data retrieved")
       return videoIds
     } finally {
@@ -47,7 +47,7 @@ export const getAllVideoIds = async () => {
   return run().catch(console.dir)
 }
 
-export const getAllVideosForChannel = async (channelId: string) => {
+export const getAllTestsForChannel = async (channelId: string) => {
   async function run() {
     try {
       await client.connect()
@@ -55,7 +55,7 @@ export const getAllVideosForChannel = async (channelId: string) => {
       const allTests = database.collection("allTests")
       const allFoundTests = await allTests.find({ channelId }).toArray()
       // const videoIds = allFoundTests.map(test => test.videoId)
-      
+
       console.log("Data retrieved for channel " + channelId)
       return allFoundTests
     } finally {
