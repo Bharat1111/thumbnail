@@ -2,6 +2,14 @@ import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
 import UserTestsContext from "../contexts/UserTestsContext"
 import { TestBlob } from "../utils/mongo"
+import SingleTestStat from "./SingleTestStat"
+
+const analyticsNames: Record<string, string> = {
+  views: "Views",
+  estimatedMinutesWatched: "Minutes Watched",
+  averageViewDuration: "Average View Duration",
+  averageViewPercentage: "Average View Percentage",
+}
 
 const TestStats = ({ videoId }: { videoId: string }) => {
   const [analytics, setAnalytics] = useState<Record<string, any>>({})
@@ -36,31 +44,28 @@ const TestStats = ({ videoId }: { videoId: string }) => {
     }
   }, [tests])
   return (
-    <div>
+    <div className="flex flex-col gap-5 px-3 m-4">
       <h1 className="font-bold text-white text-3xl">Test Stats</h1>
       {currentTest &&
-        currentTest.thumbnails.map((thumbnail, idx) => {
+        currentTest.thumbnails.map((thumbnail, thumbnailIndex) => {
           return (
-            <div>
-              <h2 className="text-white font-bold text-2xl">
-                Thumbnail {idx + 1}
-              </h2>
+            <div className="flex flex-row gap-5 bg-gray-700 p-4 rounded-xl">
               <img src={thumbnail} width="160px" height="90px" />
+              {analytics &&
+                Object.keys(analytics).map((key) => {
+                  return (
+                    <SingleTestStat
+                      key={key}
+                      rank={thumbnailIndex + 1}
+                      name={analyticsNames[key]}
+                      stat={analytics[key]}
+                    />
+                  )
+                })}
             </div>
           )
         })}
-      <div>
-        {analytics &&
-          Object.keys(analytics).map((key) => {
-            return (
-              <div key={key} className="text-white">
-                <h2>
-                  {key}: {analytics[key]}
-                </h2>
-              </div>
-            )
-          })}
-      </div>
+      <div></div>
     </div>
   )
 }
