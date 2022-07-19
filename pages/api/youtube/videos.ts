@@ -33,13 +33,15 @@ export default async function videos(req: NextApiRequest, res: NextApiResponse) 
 
         let videoResponse = await service.videos.list({
             auth: authedClient,
-            part: ['snippet'],
+            part: ['snippet', 'status'],
             id: videoIds,
             maxResults: 50
         })
 // console.log(uploads)
         let videoStats = videoResponse.data?.items
-        res.status(200).send(videoStats);
+        // filter out videos that are private
+        let publicVideos = videoStats?.filter(item => item.status?.privacyStatus === 'public')
+        res.status(200).send(publicVideos);
     } else {
         res.status(401).send('You are not signed in!');
     }
