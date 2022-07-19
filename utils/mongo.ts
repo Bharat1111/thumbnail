@@ -14,12 +14,12 @@ export type TestBlob = {
   refreshToken: string
 }
 
-export const storeSingleDataInMongo = async (blobToStore: any) => {
+export const storeSingleDataInMongo = async (blobToStore: any, collectionName: string) => {
   async function run() {
     try {
       await client.connect()
       const database = client.db("allTests")
-      const allTests = database.collection("allTests")
+      const allTests = database.collection(collectionName)
       await allTests.insertOne(blobToStore)
       console.log("Data stored")
     } finally {

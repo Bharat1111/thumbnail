@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useState } from "react"
 import { TestBlob } from "../utils/mongo"
 
@@ -11,24 +12,24 @@ const MyTests = ({ tests }: { tests: TestBlob[] }) => {
   return (
     <>
       {tests.map((test, idx) => (
-        <a
-          onClick={() => setCurrentVideoId(test.videoId)}
-          className={classNames(
-            currentVideoId === test.videoId
-              ? "bg-gray-900 text-white"
-              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-            "group flex flex-col items-center p-2 text-sm font-medium rounded-md"
-          )}
-          key={idx}
-          href={"/test/" + test.videoId}
-        >
-          <img
-            width="110"
-            height="75"
-            src={`https://img.youtube.com/vi/${test.videoId}/0.jpg`}
-          />
-          <span className="flex-1 text-xs">Started {test.startDate}</span>
-        </a>
+        <Link href={"/test/" + test.videoId} key={idx}>
+          <a
+            onClick={() => setCurrentVideoId(test.videoId)}
+            className={classNames(
+              currentVideoId === test.videoId
+                ? "bg-gray-900 text-white"
+                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+              "group flex flex-col items-center p-2 text-sm font-medium rounded-md"
+            )}
+          >
+            <img
+              width="110"
+              height="75"
+              src={`https://img.youtube.com/vi/${test.videoId}/0.jpg`}
+            />
+            <span className="flex-1 text-xs">Started {test.startDate}</span>
+          </a>
+        </Link>
       ))}
     </>
   )

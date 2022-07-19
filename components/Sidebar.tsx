@@ -1,4 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react"
+import Link from "next/link"
 import { useContext } from "react"
 import UserTestsContext from "../contexts/UserTestsContext"
 import styles from "./header.module.css"
@@ -39,9 +40,13 @@ const Sidebar = () => {
         >
           {session && (
             <>
-              <h1 className="p-1 text-white bg-green-600 cursor-pointer rounded-md text-center text-xl hover:bg-gray-700 hover:text-gray-400 mb-5 font-semibold">
-                Start new test
-              </h1>
+              <Link href="/">
+                <a>
+                  <h1 className="p-1 text-white bg-green-600 cursor-pointer rounded-md text-center text-xl hover:bg-gray-700 hover:text-gray-400 mb-5 font-semibold">
+                    Start new test
+                  </h1>
+                </a>
+              </Link>
               <h1 className="text-white text-center font-semibold text-xl">
                 Current Tests
               </h1>
@@ -52,44 +57,46 @@ const Sidebar = () => {
       </div>
 
       <div className="flex-shrink-0 flex p-4 hover:bg-gray-600">
-        <a
-          href={session ? `/api/auth/signout` : `/api/auth/signin`}
+        <Link
           className="flex-shrink-0 w-full group block"
+          href={session ? `/api/auth/signout` : `/api/auth/signin`}
         >
-          <div className="flex items-center">
-            <div>
-              {session?.user?.image && (
-                <img
-                  className="inline-block h-9 w-9 rounded-full"
-                  src={session.user.image}
-                  alt="avatar"
-                />
-              )}
-            </div>
+          <a>
+            <div className="flex items-center">
+              <div>
+                {session?.user?.image && (
+                  <img
+                    className="inline-block h-9 w-9 rounded-full"
+                    src={session.user.image}
+                    alt="avatar"
+                  />
+                )}
+              </div>
 
-            <div className="ml-3">
-              <p className="text-sm font-medium text-white">
-                {session?.user?.name}
-              </p>
-              <p
-                className="text-xs font-medium text-gray-300 group-hover:text-gray-200"
-                onClick={
-                  session?.user
-                    ? (e) => {
-                        e.preventDefault()
-                        signOut()
-                      }
-                    : (e) => {
-                        e.preventDefault()
-                        signIn("google")
-                      }
-                }
-              >
-                {session?.user ? "Sign Out" : "Sign In"}
-              </p>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-white">
+                  {session?.user?.name}
+                </p>
+                <p
+                  className="text-xs font-medium text-gray-300 group-hover:text-gray-200"
+                  onClick={
+                    session?.user
+                      ? (e) => {
+                          e.preventDefault()
+                          signOut()
+                        }
+                      : (e) => {
+                          e.preventDefault()
+                          signIn("google")
+                        }
+                  }
+                >
+                  {session?.user ? "Sign Out" : "Sign In"}
+                </p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </Link>
       </div>
     </div>
   )

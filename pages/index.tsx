@@ -31,6 +31,12 @@ const selectVideo = () => {
       return uploadSingleFile(file)
       // formData.append(`thumbnail[]`, file)
     })
+    let fileUrl = `https://img.youtube.com/vi/${selectedVideo.id}/0.jpg`
+    fileUploads.unshift(
+      axios
+        .get("/api/storage/moveFileToServer?fileUrl=" + fileUrl)
+        .then((res) => res.data)
+    )
     const channelId = selectedVideo.snippet?.channelId
     Promise.all(fileUploads).then((results) => {
       // post to DB
