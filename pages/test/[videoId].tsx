@@ -3,15 +3,15 @@ import { useRouter } from "next/router"
 import React, { useContext, useEffect, useState } from "react"
 import Layout from "../../components/layout"
 import TestStats from "../../components/TestStats"
-import UserTestsContext from "../../contexts/UserTestsContext"
+import AnalyticsUploader from "../../components/AnalyticsUploader"
 
 const testPage = () => {
   const router = useRouter()
   const { videoId } = router.query
   
-
   return (
     <Layout>
+      {videoId && <AnalyticsUploader videoId={videoId as string} />}
       {videoId && <TestStats videoId={videoId as string} />}
     </Layout>
   )

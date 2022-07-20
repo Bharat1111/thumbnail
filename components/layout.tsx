@@ -15,6 +15,7 @@ export default function Layout({ children }: Props) {
   const { data: session, status } = useSession()
   const [tests, setTests] = useState<TestBlob[]>([])
   const [channelId, setChannelId] = useState<string>("")
+  const [thumbnailStats, setThumbnailStats] = useState()
 
   useEffect(() => {
     // if (!session) return
@@ -34,7 +35,7 @@ export default function Layout({ children }: Props) {
 
   return (
     <UserTestsContext.Provider
-      value={{ tests, setTests, channelId, setChannelId }}
+      value={{ tests, setTests, channelId, setChannelId, thumbnailStats, setThumbnailStats }}
     >
       {/* <Header /> */}
       <div className="flex flex-row overflow-x-hidden min-h-screen">

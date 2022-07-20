@@ -1,5 +1,4 @@
 import { createContext } from "react"
-import { YoutubeVideoBlob } from "../components/videoSelectionList"
 import { TestBlob } from "../utils/mongo"
 
 type ThumnailSelectionContext = {
@@ -7,6 +6,8 @@ type ThumnailSelectionContext = {
     setTests: (tests: TestBlob[]) => void,
     channelId: string,
     setChannelId: (channelId: string) => void,
+    thumbnailStats: any,
+    setThumbnailStats: (thumbnailStats: any) => void,
 }
 
 const UserTestsContext = createContext<ThumnailSelectionContext>({
@@ -14,6 +15,8 @@ const UserTestsContext = createContext<ThumnailSelectionContext>({
     setTests: () => { },
     channelId: "",
     setChannelId: () => { },
+    thumbnailStats: [],
+    setThumbnailStats: () => { },
 })
 
 export default UserTestsContext
