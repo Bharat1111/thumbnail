@@ -17,29 +17,29 @@ const ThumbnailUploader = () => {
 
   return (
     <form
-      className="md:w-80 md:min-w-[320px] w-full h-auto"
+      className="md:w-52 md:min-w-[200px] w-full h-auto"
       id="uploadForm"
       onSubmit={() => {}}
       ref={formRef}
       encType="multipart/form-data"
       method="post"
     >
-      <div className="flex flex-col form-group justify-center h-full">
-        <div className="w-full h-60 md:h-[208px]">
+      <div className="flex flex-col form-group">
+        <div className="w-[200px] h-60 md:h-[140px]">
           <FileUploader
             name="video"
             types={fileTypes}
             handleChange={handleChange}
-            classes="cursor-pointer w-full h-full border-8 rounded-2xl border-white border-dashed flex flex-col justify-center items-center hover:bg-white/5 transition-colors duration-300"
+            classes="cursor-pointer w-full h-full border-[3px] rounded-2xl border-black/75 border-dashed flex flex-col justify-center items-center"
           >
-            <>
-              <h4 className="mt-5 text-white font-bold text-xl">
-                Drag & drop a thumbnail
+            <div className="flex flex-col">
+              <h4 className="text-black font-medium text-center">
+                Drag & drop
+                <p className="font-medium text-lg text-lime-500">
+                  OR Choose file
+                </p>
               </h4>
-              <p className="mt-12 font-bold text-sm text-lime-500">
-                Browse on your device
-              </p>
-            </>
+            </div>
           </FileUploader>
         </div>
       </div>

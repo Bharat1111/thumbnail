@@ -22,47 +22,44 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="w-[15%] flex flex-col border-r min-h-0 border-gray-500 bg-gray-800">
+    <div className="w-[10%] flex flex-col border-r min-h-0 border-gray-500 bg-gray-800">
       <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
-          <img
+          {/* <img
             className="w-auto h-8 rounded-lg"
             src="https://vercel.com/api/www/avatar/?u=bharat1111&s=64"
             alt="sidebar"
-          />
-          <span className="ml-2 italic font-bold text-white text-2xl">
-            Thumbnail
-          </span>
+          /> */}
+          <span className="italic font-bold text-white text-xl">Thumbnail</span>
         </div>
-        <nav
-          className="mt-5 flex-1 px-2 bg-gray-800 space-y-1"
-          aria-label="Sidebar"
-        >
+        <nav className="mt-5 flex-1 bg-gray-800 space-y-1" aria-label="Sidebar">
           {session && (
             <>
               <Link href="/">
                 <a>
-                  <h1 className="p-1 text-white bg-green-600 cursor-pointer rounded-md text-center text-xl hover:bg-gray-700 hover:text-gray-400 mb-5 font-semibold">
+                  <h1 className="p-1 text-white bg-green-600 cursor-pointer rounded-md text-center hover:bg-gray-700 hover:text-gray-400 mb-5">
                     Start new test
                   </h1>
                 </a>
               </Link>
-              <h1 className="text-white text-center font-semibold text-xl">
+              <h1 className="text-white text-center font-semibold text-lg">
                 Current Tests
               </h1>
-              <MyTests tests={tests} />{" "}
+              {/* <div> */}
+              <MyTests tests={tests} />
+              {/* </div> */}
             </>
           )}
         </nav>
       </div>
 
-      <div className="flex-shrink-0 flex p-4 hover:bg-gray-600">
+      <div className="flex-shrink-0 flex justify-center items-center py-2 hover:bg-gray-600">
         <Link
           className="flex-shrink-0 w-full group block"
           href={session ? `/api/auth/signout` : `/api/auth/signin`}
         >
           <a>
-            <div className="flex items-center">
+            <div className="flex flex-col space-y-2 items-center">
               <div>
                 {session?.user?.image && (
                   <img
@@ -73,10 +70,10 @@ const Sidebar = () => {
                 )}
               </div>
 
-              <div className="ml-3">
-                <p className="text-sm font-medium text-white">
+              <div className="">
+                {/* <p className="text-sm font-medium text-white">
                   {session?.user?.name}
-                </p>
+                </p> */}
                 <p
                   className="text-xs font-medium text-gray-300 group-hover:text-gray-200"
                   onClick={

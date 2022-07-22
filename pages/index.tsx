@@ -86,32 +86,61 @@ const selectVideo = () => {
     >
       <Layout>
         <div className={`w-full overflow-hidden flex flex-col min-h-screen`}>
-          <main className={`ml-3 flex flex-col flex-1 pl-3`}>
-            {session && (
-              <>
-                <h1 className="py-4 font-bold text-3xl text-white">
-                  Select Video to Thumbnail test
-                </h1>
-                <VideoSelectionList />
-              </>
-            )}
-            <h1 className="py-8 font-bold text-3xl text-white">
-              Drop any number of Thumbnails
+          <main className={`ml-16 flex flex-col flex-1 py-5`}>
+            <h1 className="pb-5 font-bold text-3xl text-white">
+              Start a new test
             </h1>
-            <div className="flex flex-row justify-start pb-8">
-              <ThumbnailUploader />
-              <UploadedThumbnailDisplayAndRemoval />
+            <VideoSelectionList />
+
+            <div className="pt-5 w-[95%] flex flex-row justify-between">
+              <div className="p-2 pt-3 w-[71%] rounded-xl bg-[#FFEFE2]">
+                <div className="flex flex-row">
+                  <div className="font-bold flex items-center justify-center text-3xl w-14 h-14 bg-[#F0D2B9] rounded-full">
+                    <span className="mt-[-3px]">2</span>
+                  </div>
+                  <div className="flex flex-col pl-2 w-[90%]">
+                    <h1 className="pb-6 font-medium text-3xl text-black">
+                      Upload Thumbnail(s)
+                    </h1>
+                    <div className="flex flex-row justify-start">
+                      <div className="flex flex-col">
+                        <div className="flex flex-row gap-x-2">
+                          <ThumbnailUploader />
+                          <UploadedThumbnailDisplayAndRemoval />
+                        </div>
+                        <div className="pt-4 font-normal text-lg">
+                          Upload up to 10. Each thumbnail will run against
+                          original
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-3 p-2 text-black w-[27%] rounded-xl bg-[#EFFcEF]">
+                <div className="flex flex-row">
+                  <div className="font-bold flex items-center justify-center text-3xl w-14 h-14 bg-[#C5E1C5] rounded-full">
+                    <span className="mt-[-3px]">3</span>
+                  </div>
+                  <div className="flex flex-col pl-3 w-[80%]">
+                    <h1 className="text-3xl pb-6 font-medium">Run Test</h1>
+                    <p className="text-md">
+                      Each thumbnail including the original will be tested for 3
+                      days.
+                    </p>
+                    <p className="text-md">
+                      Total test time: {(thumbnailFiles.length + 1) * 3}
+                    </p>
+                    <button
+                      onClick={startTest}
+                      className="p-2 bg-green-600 cursor-pointer rounded-md text-center text-md hover:bg-gray-700 hover:text-white mb-5 font-medium w-fit"
+                    >
+                      Start test
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p className="text-white text-xl">
-              Each thumbnail (including the original) will be tested for 3 days.
-              Total test time: {(thumbnailFiles.length + 1) * 3} days{" "}
-              <button
-                onClick={startTest}
-                className="p-2 text-white bg-green-600 cursor-pointer rounded-md text-center text-xl hover:bg-gray-700 hover:text-gray-400 mb-5 font-semibold w-fit ml-3"
-              >
-                Start test
-              </button>
-            </p>
           </main>
         </div>
       </Layout>

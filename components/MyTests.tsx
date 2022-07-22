@@ -18,8 +18,8 @@ const MyTests = ({ tests }: { tests: TestBlob[] }) => {
             className={classNames(
               currentVideoId === test.videoId
                 ? "bg-gray-900 text-white"
-                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-              "group flex flex-col items-center p-2 text-sm font-medium rounded-md"
+                : "text-gray-300 hover:bg-gray-700",
+              "group flex flex-col items-center text-sm font-medium rounded-md py-2"
             )}
           >
             <img

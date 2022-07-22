@@ -14,7 +14,7 @@ const analyticsNames: Record<string, string> = {
 const TestStats = ({ videoId }: { videoId: string }) => {
   const [analytics, setAnalytics] = useState<Record<string, any>>({})
   const [currentTest, setCurrentTest] = useState<TestBlob>()
-  const { tests } = useContext(UserTestsContext)
+  const { tests, thumbnailStats } = useContext(UserTestsContext)
 
   // videoId, channelId, startDate
 
@@ -43,25 +43,43 @@ const TestStats = ({ videoId }: { videoId: string }) => {
       })
     }
   }, [tests])
+  console.log("thumbnailStats", thumbnailStats)
   return (
     <div className="flex flex-col gap-5 px-3 m-4">
       <h1 className="font-bold text-white text-3xl">Test Stats</h1>
       {currentTest &&
         currentTest.thumbnails.map((thumbnail, thumbnailIndex) => {
           return (
-            <div className="flex flex-row gap-5 bg-gray-700 p-4 rounded-xl">
-              <img src={thumbnail} width="160px" height="90px" />
-              {analytics &&
-                Object.keys(analytics).map((key) => {
+            <div
+              key={thumbnailIndex}
+              className="flex flex-row gap-5 bg-gray-700 p-4 rounded-xl"
+            >
+              <img src={thumbnail} width="150px" height="80px" />
+              {/* {thumbnailStats ? (
+                analytics &&
+                Object.keys(analytics).map((key, index) => {
                   return (
                     <SingleTestStat
-                      key={key}
-                      rank={thumbnailIndex + 1}
-                      name={analyticsNames[key]}
-                      stat={analytics[key]}
+                      key={index}
+                      idx={index}
+                      thumbnailStats={thumbnailStats[thumbnailIndex]}
                     />
                   )
-                })}
+                })
+              ) : (
+                <div className="text-white text-2xl font-bold">
+                  Waiting for analytics...
+                </div>
+              )} */}
+              {thumbnailStats ? (
+                <SingleTestStat
+                  thumbnailStats={thumbnailStats[thumbnailIndex]}
+                />
+              ) : (
+                <div className="text-white text-2xl font-bold">
+                  Waiting for Analytics...
+                </div>
+              )}
             </div>
           )
         })}

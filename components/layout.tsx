@@ -40,7 +40,7 @@ export default function Layout({ children }: Props) {
       {/* <Header /> */}
       <div className="flex flex-row overflow-x-hidden min-h-screen">
         <Sidebar />
-        <main className="w-[85%] bg-gray-800">{children}</main>
+        <main className="w-[90%] bg-gray-800">{children}</main>
       </div>
     </UserTestsContext.Provider>
   )
