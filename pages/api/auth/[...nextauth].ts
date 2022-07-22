@@ -74,13 +74,13 @@ export const authOptions: NextAuthOptions = {
   //   secret: process.env.SECRET
   // },
   callbacks: {
-    async jwt({ token, account, user }) {
+    async jwt({ token, user, account }) {
       // Initial Sign in
       if (account && user) {
         return {
           accessToken: account.access_token,
-          refreshToken: account.refresh_token,
           accessTokenExpires: Date.now() + account?.expires_at! * 1000,
+          refreshToken: account.id_token,
           user,
         }
       }
